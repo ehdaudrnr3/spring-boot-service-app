@@ -416,7 +416,7 @@ public interface RegionDetailRepository extends JpaRepository<RegionDetail, Long
 + openCsv : com.opencsv
 ### :memo: 빌드 및 실행방법
 
-##### :mega: 다운로드 :
+##### :mega: 다운로드 : https://github.com/ehdaudrnr3/spring-boot-service-app/raw/master/spring-boot-service-app-0.0.1-SNAPSHOT.jar
 
 ##### :mega: 실행방법 :
 ```

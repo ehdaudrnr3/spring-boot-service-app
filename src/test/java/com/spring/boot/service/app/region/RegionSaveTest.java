@@ -87,6 +87,33 @@ public class RegionSaveTest extends RegionBaseTest {
     }
 	
 	@Test
+    public void insertAndupdateSuccess() throws Exception {
+		
+		RegionDto insertRegionDto = RegionDto.builder()
+				.region("동백시").target("동백시에 사는 사람").usage("걸어서").limit("10억원 이내")
+				.rate("5%").institute("동백시").mgmt("동백지점").reception("동백시 소재 영업점").build();
+		
+		List<RegionDto> list = Arrays.asList(insertRegionDto);
+		String content = objectMapper.writeValueAsString(list);
+		
+		RegionDto updateRegionDto = RegionDto.builder()
+				.region("강릉시").target("강릉시에 사는 사람").usage("운전").limit("560억원 이내")
+				.rate("3.6%~4.2%").institute("강릉시").mgmt("강릉시청").reception("강릉시 소재 영업점").build();
+		
+		list = Arrays.asList(updateRegionDto);
+		content = objectMapper.writeValueAsString(list);
+		
+		ResultActions actions = this.mockMvc.perform(post(API_URI)
+				.header(Constants.AUTHORIZATION, access_token)
+				.content(content)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andDo(print());
+		
+		actions
+			.andExpect(status().isOk());
+    }
+	
+	@Test
     public void missingRequiredForRegionName() throws Exception {
 		RegionDto regionDto = RegionDto.builder().target("동백시에 사는 사람").usage("걸어서").limit("10억원 이내")
 				.rate("5%").institute("동백시").mgmt("동백지점").reception("동백시 소재 영업점").build();
